@@ -1,0 +1,90 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: postgres:alpine
+    container_name: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: app_database
+    ports:
+      - "5532:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - app_network
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin_ui
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5550:80"
+    depends_on:
+      - postgres
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    networks:
+      - app_network
+
+  json-server:
+    build: ./json-server
+    container_name: json_server_api
+    ports:
+      - "3001:3001"
+    working_dir: /usr/src/app
+    volumes:
+      - ./json-server:/usr/src/app
+    command: json-server --watch db.json --host 0.0.0.0 --port 3001
+    networks:
+      - app_network
+
+  backend:
+    build: ./backend
+    container_name: backend_api
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./backend:/usr/src/app
+      - /usr/src/app/node_modules
+    depends_on:
+      - postgres
+    networks:
+      - app_network
+
+  frontend:
+    build: ./frontend
+    container_name: frontend_app
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/usr/src/app
+      - /usr/src/app/node_modules
+    depends_on:
+      - json-server
+    environment:
+      - VITE_API_URL=http://localhost:3001
+    networks:
+      - app_network
+
+  nginx:
+    build: ./nginx
+    container_name: nginx_proxy
+    ports:
+      - "8080:80"
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - app_network
+
+volumes:
+  postgres_data:
+  pgadmin_data:
+
+networks:
+  app_network:
+    driver: bridge

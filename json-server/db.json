@@ -1,0 +1,110 @@
+{
+  "usuarios": [
+    {
+      "nome": "Daniel ",
+      "email": "daniel@teste.com",
+      "tipo": "Professor",
+      "password": "123",
+      "id": 1
+    },
+    {
+      "nome": "felipe",
+      "email": "felipe@teste.com",
+      "tipo": "Aluno",
+      "password": "123",
+      "id": 2
+    }
+  ],
+  "categorias": [
+    {
+      "nome": "Tecnologia ",
+      "id": 1
+    }
+  ],
+  "cursos": [
+    {
+      "titulo": "Engenharia da computacao ",
+      "descricao": "curso ",
+      "instrutor": "Daniel ",
+      "categoria": "Tecnologia ",
+      "nivel": "Iniciante",
+      "preco": 89.9,
+      "duracao": "",
+      "aulas": 0,
+      "gratis": false,
+      "destaque": false,
+      "topicos": [],
+      "avaliacao": 5,
+      "alunos": 0,
+      "id": 1
+    }
+  ],
+  "modulos": [
+    {
+      "id_curso": 1,
+      "titulo": "Introducao ",
+      "ordem": 1,
+      "id": 1
+    }
+  ],
+  "aulas": [
+    {
+      "id_modulo": 1,
+      "titulo": "Algoritmos",
+      "tipoConteudo": "Vídeo",
+      "url_conteudo": "www.a.com",
+      "duracaoMinutos": 40,
+      "ordem": 1,
+      "id": 1
+    }
+  ],
+  "matriculas": [
+    {
+      "id_usuario": 2,
+      "id_curso": 1,
+      "dataMatricula": "13/06/2026",
+      "status": "Ativo",
+      "id": 1
+    }
+  ],
+  "progressoAulas": [],
+  "trilhas": [
+    {
+      "nome": "Formacao React",
+      "descricao": "Testee",
+      "id": 1
+    }
+  ],
+  "planos": [
+    {
+      "nome": "Plano basic",
+      "preco": 89.9,
+      "periodicidade": "Mensal",
+      "descricao": "Teste",
+      "status": "Ativo",
+      "id": 1
+    }
+  ],
+  "assinaturas": [
+    {
+      "id_usuario": 2,
+      "id_plano": 1,
+      "dataInicio": "13/06/2026",
+      "status": "Ativo",
+      "valorCobrado": 89.9,
+      "id": 1
+    }
+  ],
+  "pagamentos": [
+    {
+      "id_assinatura": 1,
+      "valor": 89.9,
+      "dataPagamento": "13/06/2026",
+      "status": "Pago",
+      "codigoTransacao": "TRX-755872",
+      "id": 1
+    }
+  ],
+  "avaliacoes": [],
+  "certificados": []
+}
